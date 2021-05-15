@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.urls import path
 from django.views.generic import TemplateView
+from store.views import ProductDetailView
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name="base.html"), name='home'),
     path('login', TemplateView.as_view(template_name="login.html"), name='login'),
     path('list', TemplateView.as_view(template_name="product-list.html"), name='list'),
-    path('detail-product', TemplateView.as_view(template_name="product-detail.html"), name='detail'),
+    # path('detail', TemplateView.as_view(template_name="product-detail.html"), name='detail'),
+    path('detail/<pk>', ProductDetailView.as_view(), name='detail'),
+    path('', TemplateView.as_view(template_name="base.html"), name='home'),
 ]
 
