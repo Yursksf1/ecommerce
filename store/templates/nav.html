@@ -30,17 +30,18 @@
                 <li><a href="#">profile</a></li>
                 <li><a href="#">carrito de compras</a></li>
                 <li><a href="#">historico</a></li>
+                <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-in"></span> Salir</a></li>
                 </ul>
             </div>
 
         {% else %}
-        
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Salir</a></li> 
-       
+
+            <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-user"></span> Iniciar Session</a></li>
+            <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-user"></span> Registrarse</a></li>
+
         {% endif %}
 
-        
+
 
       </ul>
 
