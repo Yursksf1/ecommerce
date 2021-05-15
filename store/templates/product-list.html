@@ -7,20 +7,23 @@
 {% block content %}
 
 <div class="container">
-
-  <div class="row">
-    <div class="col-sm-6 col-md-2">
-      <div class="card producto">
-        <img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
-        <div class="card-body">
-          <h4 class="card-title">John Doe</h4>
-          <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-          <a href="{% url 'detail' pk='107b49d8a0254b5c9cb64a4e2e00cf4c' %}" class="btn btn-primary">ver producto</a>
-        </div>
-      </div>
+    <div class="row">
+        {% for product in object_list %}
+            {% if product.active and product.stock%}
+                <div class="col-sm-6 col-md-2">
+                  <div class="card producto">
+                    <img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                    <div class="card-body">
+                      <h4 class="card-title">{{ product.name }}</h4>
+                      <h3 class="card-title">{{ product.amount }}</h3>
+                      <p class="card-text">{{ product.description }}</p>
+                      <a href="{% url 'detail' pk=product.id  %}" class="btn btn-primary">ver producto</a>
+                    </div>
+                  </div>
+                </div>
+            {% endif %}
+        {% endfor %}
     </div>
-    <div class="col-sm-6 col-md-2">
-
   </div>
 
 
