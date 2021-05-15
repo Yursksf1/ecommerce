@@ -12,6 +12,10 @@
             {% if product.active and product.stock%}
                 <div class="col-sm-6 col-md-2">
                   <div class="card producto">
+                      {% if product.imagen_set.all %}
+                          <img src="{% get_media_prefix %}{{product.imagen_set.all.0.upload}}"/>
+
+                      {% endif %}
                     <img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
                     <div class="card-body">
                       <h4 class="card-title">{{ product.name }}</h4>
