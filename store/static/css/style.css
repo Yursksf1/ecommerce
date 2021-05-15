@@ -1,0 +1,10 @@
+
+.producto {
+    border-width: 1px;
+    padding: 15px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 30px;
+    margin-top: 10px;
+}
+

@@ -18,5 +18,8 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name="base.html")),
+    path('login', TemplateView.as_view(template_name="login.html")),
+    path('list', TemplateView.as_view(template_name="product-list.html")),
+    path('detail', TemplateView.as_view(template_name="product-detail.html")),
 ]
 
