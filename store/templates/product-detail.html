@@ -7,9 +7,11 @@
 {% block content %}
 
 <div class="container">
+        <img src="{% static 'images/hi.jpg' %}" alt="Hi!">
 
-        {% if product.imagen_set.all() %}
-            {{ product.imagen_set.all()[0].upload }}
+        {% if product.imagen_set.all %}
+                <img src="{{ product.imagen_set.0.url}}" alt="{{ post.title }}">
+{#            {{ product.imagen_set.all()[0].upload }}#}
         {% else %}
             <img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="Card image" >
         {% endif %}
