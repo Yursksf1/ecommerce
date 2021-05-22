@@ -80,8 +80,6 @@ class Product(models.Model):
 
     active = models.fields.BooleanField(default=True)
 
-    def __str__(self):
-        return self.name
 
 
 class Imagen(models.Model):
@@ -90,12 +88,10 @@ class Imagen(models.Model):
         Product,
         on_delete=models.CASCADE,
     )
-    upload = models.FileField(upload_to='uploads/')
+    upload = models.FileField(upload_to='media/')
     name = models.fields.CharField(max_length=100)
     active = models.fields.BooleanField(default=True)
 
-    def __str__(self):
-        return self.name
 
 
 

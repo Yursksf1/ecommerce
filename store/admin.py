@@ -8,7 +8,25 @@ admin.site.register(City)
 admin.site.register(Address)
 
 admin.site.register(Category)
-admin.site.register(Product)
+
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'amount', 'category', 'stock', 'active', 'name_image')
+    fields = ('name', 'amount', 'category',  'active', 'description')
+    list_filter = ('active', 'category')
+    search_fields = ('name',)
+
+    @admin.display(ordering='name_image')
+    def name_image(self, obj):
+        name = ''
+        if obj.imagen_set.all():
+            name = obj.imagen_set.first().name
+
+        return name
+
+admin.site.register(Product, ProductAdmin)
+
+
 admin.site.register(Imagen)
 
 admin.site.register(Buy)
