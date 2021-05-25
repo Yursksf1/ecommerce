@@ -80,6 +80,8 @@ class Product(models.Model):
 
     active = models.fields.BooleanField(default=True)
 
+    def __str__(self):
+        return self.name
 
 
 class Imagen(models.Model):

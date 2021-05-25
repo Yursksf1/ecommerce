@@ -4,7 +4,17 @@ from django.contrib import admin
 from .models import Country, City, Address, Category, Product, Imagen, Buy, UserProfile
 
 admin.site.register(Country)
-admin.site.register(City)
+
+class CityAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'country')
+    fields = ('name', 'country')
+
+    list_filter = ['country__name', ]
+
+admin.site.register(City, CityAdmin)
+
+
+
 admin.site.register(Address)
 
 admin.site.register(Category)
@@ -23,6 +33,7 @@ class ProductAdmin(admin.ModelAdmin):
             name = obj.imagen_set.first().name
 
         return name
+
 
 admin.site.register(Product, ProductAdmin)
 
