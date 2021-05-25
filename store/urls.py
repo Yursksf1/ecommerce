@@ -18,14 +18,16 @@ from django.views.generic import TemplateView
 
 from rest_framework import routers
 
-from store.views import ProductDetailView, ProductListView, ProductViewSet
+from store.views import ProductDetailView, ProductListView, CategoryViewSet, ProductDetail, ProductList
 
 
 router = routers.DefaultRouter()
-router.register(r'product', ProductViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
+    path('api/products/', ProductList.as_view()),
+    path('api/products/<pk>/', ProductDetail.as_view()),
+
     path('login', TemplateView.as_view(template_name="login.html"), name='login'),
     path('list', ProductListView.as_view(), name='list'),
     path('detail/<pk>', ProductDetailView.as_view(), name='detail'),
