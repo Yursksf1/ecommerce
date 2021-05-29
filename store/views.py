@@ -96,7 +96,7 @@ class CategoryList(APIView):
         return Response(data)
 
     def post(self, request, format=None):
-        serializer = CategorySerializer(data=request.data)
+        serializer = CategoryListSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -119,7 +119,7 @@ class CategoryDetail(APIView):
 
     def put(self, request, pk, format=None):
         category = self.get_object(pk)
-        serializer = CategorySerializer(category, data=request.data)
+        serializer = CategorySerializer(category, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
