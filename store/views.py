@@ -8,8 +8,8 @@ from django.views.generic import ListView
 from rest_framework import viewsets
 from rest_framework import permissions
 
-from .serializers import ProductSerializer, CategorySerializer, CategoryListSerializer, ProductListSerializer, CreateProductSerializer
-from .models import Product, Category
+from .serializers import ProductSerializer, CategorySerializer, CategoryListSerializer, ProductListSerializer, CreateProductSerializer, CountryListSerializer, CountrySerializer
+from .models import Product, Category, Country
 
 class ProductDetailView(DetailView):
     model = Product
@@ -128,4 +128,49 @@ class CategoryDetail(APIView):
     def delete(self, request, pk, format=None):
         category = self.get_object(pk)
         category.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+class CountryList(APIView):
+    """
+    List all snippets, or create a new snippet.
+    """
+    def get(self, request, format=None):
+        country = Country.objects.all()
+        serializer = CountryListSerializer(country, many=True)
+        data = serializer.data
+        return Response(data)
+
+    def post(self, request, format=None):
+        serializer = CountryListSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class CountryDetail(APIView):
+    """
+    Retrieve, update or delete a snippet instance.
+    """
+    def get_object(self, pk):
+        try:
+            return Country.objects.get(pk=pk)
+        except Country.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        country = self.get_object(pk)
+        serializer = CountrySerializer(country)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        country = self.get_object(pk)
+        serializer = CountrySerializer(country, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        country = self.get_object(pk)
+        country.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
