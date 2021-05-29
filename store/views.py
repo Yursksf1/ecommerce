@@ -8,7 +8,7 @@ from django.views.generic import ListView
 from rest_framework import viewsets
 from rest_framework import permissions
 
-from .serializers import ProductSerializer, CategoryListSerializer, ProductListSerializer
+from .serializers import ProductSerializer, CategorySerializer, CategoryListSerializer, ProductListSerializer, CreateProductSerializer
 from .models import Product, Category
 
 class ProductDetailView(DetailView):
@@ -46,7 +46,7 @@ class ProductList(APIView):
         return Response(data)
 
     def post(self, request, format=None):
-        serializer = ProductSerializer(data=request.data)
+        serializer = CreateProductSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -90,8 +90,8 @@ class CategoryList(APIView):
     List all snippets, or create a new snippet.
     """
     def get(self, request, format=None):
-        product = Category.objects.all()
-        serializer = CategoryListSerializer(product, many=True)
+        category = Category.objects.all()
+        serializer = CategoryListSerializer(category, many=True)
         data = serializer.data
         return Response(data)
 
@@ -102,3 +102,30 @@ class CategoryList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
+class CategoryDetail(APIView):
+    """
+    Retrieve, update or delete a snippet instance.
+    """
+    def get_object(self, pk):
+        try:
+            return Category.objects.get(pk=pk)
+        except Category.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        category = self.get_object(pk)
+        serializer = CategorySerializer(category)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        category = self.get_object(pk)
+        serializer = CategorySerializer(category, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        category = self.get_object(pk)
+        category.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
