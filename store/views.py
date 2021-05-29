@@ -8,7 +8,7 @@ from django.views.generic import ListView
 from rest_framework import viewsets
 from rest_framework import permissions
 
-from .serializers import ProductSerializer, CategorySerializer, ProductListSerializer
+from .serializers import ProductSerializer, CategoryListSerializer, ProductListSerializer
 from .models import Product, Category
 
 class ProductDetailView(DetailView):
@@ -26,7 +26,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
     API endpoint that allows users to be viewed or edited.
     """
     queryset = Category.objects.all()
-    serializer_class = CategorySerializer
+    serializer_class = CategoryListSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 from django.http import Http404
@@ -84,3 +84,21 @@ class ProductDetail(APIView):
         product = self.get_object(pk)
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class CategoryList(APIView):
+    """
+    List all snippets, or create a new snippet.
+    """
+    def get(self, request, format=None):
+        product = Category.objects.all()
+        serializer = CategoryListSerializer(product, many=True)
+        data = serializer.data
+        return Response(data)
+
+    def post(self, request, format=None):
+        serializer = CategorySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+

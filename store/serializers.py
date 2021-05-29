@@ -13,7 +13,7 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['id', 'name', 'description', 'stock', 'amount', 'active']
 
 
-class CategorySerializer(serializers.HyperlinkedModelSerializer):
+class CategoryListSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Category
         fields = ['id', 'name', 'description']
