@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "600f5727-3357-4ff6-a7b7-4c118446e461",
+		"name": "test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Authentication",
+					"item": [
+						{
+							"name": "Log",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "JWT ",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"username\": \"prueba\",\n\t\"password\": \"pruebaprueba\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/auth/token/",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"token",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get Products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIyMjQ5MTg0LCJqdGkiOiJjZGE3NDNiODViMzc0YmRiYjA4NmMwMmY2MzlmZjU5ZiIsInVzZXJfaWQiOjJ9.Z4s7k5kH35kde9c29o_CJijXDfpZRJMvUYRlAYxHkLE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/products/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"products",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product detail",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIyMjQ5MTg0LCJqdGkiOiJjZGE3NDNiODViMzc0YmRiYjA4NmMwMmY2MzlmZjU5ZiIsInVzZXJfaWQiOjJ9.Z4s7k5kH35kde9c29o_CJijXDfpZRJMvUYRlAYxHkLE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/products/be427606-9e7b-49d3-8017-afc69780ae70",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"be427606-9e7b-49d3-8017-afc69780ae70"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "127.0.0.1:8000"
+		},
+		{
+			"key": "token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIyMDc2OTQxLCJqdGkiOiI0ZWY1NzY5MjExZmQ0MTZiYmM3MzkwOGIxNGQ4MWM0YSIsInVzZXJfaWQiOjJ9.DJ3ZWGxFxgjmZwy3kD4hDzMR7KxVhAfieUSyrJGjieQ"
+		}
+	]
+}
