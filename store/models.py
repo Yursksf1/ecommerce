@@ -28,6 +28,7 @@ class City(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     country = models.ForeignKey(
         Country,
+        related_name='cities',
         on_delete=models.CASCADE,
     )
     name = models.fields.CharField(max_length=100)

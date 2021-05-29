@@ -31,9 +31,13 @@ class CategorySerializer(serializers.HyperlinkedModelSerializer):
 class CountryListSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Country
-        fields = ['id','name']
+        fields = ['id', 'name']
+
 
 class CountrySerializer(serializers.HyperlinkedModelSerializer):
+    cities = serializers.StringRelatedField(many=True)
+
     class Meta:
         model = Country
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'cities']
+
