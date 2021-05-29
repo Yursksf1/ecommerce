@@ -1,4 +1,4 @@
-from .models import Product, Category, Country
+from .models import Product, Category, Country, City
 from rest_framework import serializers
 
 
@@ -40,4 +40,16 @@ class CountrySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Country
         fields = ['id', 'name', 'cities']
+
+
+class CityListSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = City
+        fields = ['id', 'name']
+
+
+class CitySerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = City
+        fields = ['id', 'name']
 

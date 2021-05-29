@@ -5,11 +5,18 @@ from django.utils import timezone
 from django.views.generic.detail import DetailView
 from django.views.generic import ListView
 
+from django.http import Http404
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
 from rest_framework import viewsets
 from rest_framework import permissions
 
-from .serializers import ProductSerializer, CategorySerializer, CategoryListSerializer, ProductListSerializer, CreateProductSerializer, CountryListSerializer, CountrySerializer
+from .serializers import ProductSerializer, CategorySerializer, CategoryListSerializer, ProductListSerializer, \
+    CreateProductSerializer, CountryListSerializer, CountrySerializer
 from .models import Product, Category, Country
+
 
 class ProductDetailView(DetailView):
     model = Product
@@ -28,11 +35,6 @@ class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategoryListSerializer
     permission_classes = [permissions.IsAuthenticated]
-
-from django.http import Http404
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
 
 
 class ProductList(APIView):
@@ -85,10 +87,12 @@ class ProductDetail(APIView):
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
 class CategoryList(APIView):
     """
     List all snippets, or create a new snippet.
     """
+
     def get(self, request, format=None):
         category = Category.objects.all()
         serializer = CategoryListSerializer(category, many=True)
@@ -106,6 +110,7 @@ class CategoryDetail(APIView):
     """
     Retrieve, update or delete a snippet instance.
     """
+
     def get_object(self, pk):
         try:
             return Category.objects.get(pk=pk)
@@ -129,6 +134,7 @@ class CategoryDetail(APIView):
         category = self.get_object(pk)
         category.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 class CountryList(APIView):
     """
