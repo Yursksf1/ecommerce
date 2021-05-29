@@ -341,7 +341,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"description\": \"muy deliciosa 123\"\n}",
+							"raw": "{\n\"description\": \"muy deliciosa 123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -349,14 +349,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/category/{{category_id}}",
+							"raw": "{{host}}/api/category/{{category_id}}/",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"category",
-								"{{category_id}}"
+								"{{category_id}}",
+								""
 							]
 						}
 					},
@@ -385,14 +386,15 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/category/{{category_id}}",
+							"raw": "{{host}}/api/category/{{category_id}}/",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"category",
-								"{{category_id}}"
+								"{{category_id}}",
+								""
 							]
 						}
 					},
