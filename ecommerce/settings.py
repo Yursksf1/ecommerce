@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 DATABASES = {}
-local = False
+local = True
 
 if local:
     DATABASES = {
@@ -91,23 +91,23 @@ if local:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-else:
+#else:
     # Database
     # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-    from database_conf import (
-        DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT
-    )
+ #   from database_conf import (
+ #     DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT
+  #  )
 
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': DB_NAME,
-            'USER': DB_USER,
-            'PASSWORD': DB_PASSWORD,
-            'HOST': DB_HOST,
-            'PORT': DB_PORT,
-        }
-    }
+    #DATABASES = {
+     #   'default': {
+      #      'ENGINE': 'django.db.backends.postgresql',
+       #     'NAME': DB_NAME,
+        #    'USER': DB_USER,
+         #   'PASSWORD': DB_PASSWORD,
+          #  'HOST': DB_HOST,
+           # 'PORT': DB_PORT,
+        #}
+    #}
 
 
 
