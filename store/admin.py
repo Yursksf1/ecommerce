@@ -22,7 +22,7 @@ admin.site.register(Category)
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'amount', 'category', 'stock', 'active', 'name_image')
-    fields = ('name', 'amount', 'category',  'active', 'description')
+    # fields = ('name', 'amount', 'category',  'active', 'description')
     list_filter = ('active', 'category')
     search_fields = ('name',)
 
