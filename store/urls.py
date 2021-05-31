@@ -19,7 +19,7 @@ from django.views.generic import TemplateView
 from rest_framework import routers
 
 from store.views import ProductDetailView, ProductListView, CategoryViewSet, ProductDetail,\
-     ProductList, CategoryDetail, CategoryList, CountryList, CountryDetail
+     ProductList, CategoryDetail, CategoryList, CountryList, CountryDetail, CityList, CityDetail
 
 
 router = routers.DefaultRouter()
@@ -36,10 +36,13 @@ urlpatterns = [
     path('api/country/', CountryList.as_view()),
     path('api/country/<pk>/', CountryDetail.as_view()),
 
+    path('api/city/', CityList.as_view()),
+    path('api/city/<pk>/', CityDetail.as_view()),
+
 
     path('login', TemplateView.as_view(template_name="login.html"), name='login'),
     path('list', ProductListView.as_view(), name='list'),
     path('detail/<pk>', ProductDetailView.as_view(), name='detail'),
     path('', TemplateView.as_view(template_name="base.html"), name='home'),
-    
+
 ]

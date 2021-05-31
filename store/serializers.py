@@ -23,23 +23,11 @@ class CategoryListSerializer(serializers.HyperlinkedModelSerializer):
         model = Category
         fields = ['id', 'name']
 
+
 class CategorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Category
         fields = ['id', 'name', 'description']
-
-class CountryListSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Country
-        fields = ['id', 'name']
-
-
-class CountrySerializer(serializers.HyperlinkedModelSerializer):
-    cities = serializers.StringRelatedField(many=True)
-
-    class Meta:
-        model = Country
-        fields = ['id', 'name', 'cities']
 
 
 class CityListSerializer(serializers.HyperlinkedModelSerializer):
@@ -49,7 +37,31 @@ class CityListSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class CitySerializer(serializers.HyperlinkedModelSerializer):
+    country = 'colombis'
+    cities = CityBaseSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = City
+        fields = ['id', 'name', 'country']
+
+
+class CityBaseSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = City
         fields = ['id', 'name']
+
+
+class CountryListSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Country
+        fields = ['id', 'name']
+
+
+class CountrySerializer(serializers.HyperlinkedModelSerializer):
+    cities = CityBaseSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Country
+        fields = ['id', 'name', 'cities']
+
 
